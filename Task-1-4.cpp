@@ -45,36 +45,30 @@ std::string encode(const std::string& s) {
 }
 
 std::string decode(const std::string& s) {
+
     std::string res = "";
 
-    // Проходим по строке с шагом 1, т.к. каждый символ был преобразован
     for (int i = 0; i < s.size(); i++) {
-        // Преобразуем символ обратно в число, вычитая пробел
         int num = static_cast<int>(s[i]) - ' ';
-        
-        // Преобразуем число в строку и добавляем к результату
-        res += std::to_string(num);
+        res += num < 10 ? '0' + std::to_string(num) : std::to_string(num); 
     }
 
     return res;
 }
 
+std::string revert(const std::string& str) {
+	std::string res = "";
 
-// Decoding function
-std::string test(const std::vector<int>& v) {
-    std::string decoded_string;
-    for (int val : v) {
-        // Convert the integer value back to its binary representation
-        std::string binary = to_binary(val);
+	for (int i = 0; i < str.size(); i += 10) {
 
-        // Split the binary into 8-bit chunks (representing a character)
-        for (int i = 0; i < 4; ++i) {
-            std::string char_binary = binary.substr(i * 8, 8);
-            int char_val = from_binary(char_binary);
-            decoded_string += static_cast<char>(char_val);
-        }
-    }
-    return decoded_string;
+		std::string binaryStr = '0' + to_binary(std::stoi(str.substr(i, 10)));
+
+		for (int i = 0; i < binaryStr.size(); i += 8) {
+			res += from_binary(binaryStr.substr(i, 8));
+		}
+	}
+
+    return res;
 }
 
 
@@ -104,14 +98,6 @@ void Run_4_Decode() {
     }
 
     std::cout << stringVector << std::endl;
-
-    std::vector<int> intVector;
-
-    for (char c : stringVector) {
-        intVector.push_back(c - '0');
-    }
    
-    std::cout << test(intVector) << std::endl;
+    std::cout << revert(stringVector) << std::endl;
 }
-
-
