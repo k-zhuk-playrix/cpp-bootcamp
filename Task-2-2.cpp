@@ -8,7 +8,7 @@ const int N = 10;
 
 // проверяем что точка внутри поля и не является границей
 bool isValid(int x, int y, std::vector<std::vector<int>>& grid) {
-    return x >= 0 && x < N && y >= 0 && y < N && grid[x][y] == 1;
+    return x >= 0 && x < N && y >= 0 && y < N && grid[x][y] == 0;
 }
 
 void dfs(int x, int y, std::vector<std::vector<int>>& grid) {
@@ -70,14 +70,21 @@ void printGrid(const std::vector<std::vector<int>>& grid) {
 }
 
 void Run_2_2() {
-    std::vector<std::vector<int>> grid(N, std::vector<int>(N, 0));
-
-    grid[5][5] = 1; grid[5][6] = 1; grid[5][7] = 1; grid[6][7] = 1;
-    grid[7][7] = 1; grid[7][6] = 1; grid[7][5] = 1; grid[6][5] = 1;
-
-    // Точка внутри контура 
-    int startX = 6;
-    int startY = 6;
+    int startX = 5;
+    int startY = 5;
+    
+    std::vector<std::vector<int>> grid = {
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
+	{0, 0, 0, 0, 1, 0, 1, 1, 1, 0},
+	{0, 0, 1, 1, 1, 0, 0, 0, 1, 1},
+	{0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
+	{0, 0, 1, 0, 0, 0, 0, 0, 1, 1},	
+	{0, 0, 1, 1, 1, 0, 0, 0, 1, 0},
+	{0, 0, 0, 0, 1, 1, 1, 1, 1, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+    };
 
     printGrid(grid);
 
